@@ -11,35 +11,126 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Twitter',
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.black,
-          primarySwatch: Colors.lightBlue,
+      title: 'Twitter',
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.black,
+        primarySwatch: Colors.lightBlue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          shape:
+              const Border(bottom: BorderSide(color: Colors.grey, width: 0.5)),
+          // leading: const Icon(
+          //   FontAwesomeIcons.circleUser,
+          //   color: Colors.blueAccent,
+          // ),
+          backgroundColor: Colors.black,
+          title: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+              child: const Icon(
+                FontAwesomeIcons.twitter,
+                size: 30,
+                color: Colors.blue,
+              )),
         ),
-        home: Scaffold(
-          appBar: AppBar(
-            shape: const Border(
-                bottom: BorderSide(color: Colors.grey, width: 0.5)),
-            leading: IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.circleUser,
-                color: Colors.blueAccent,
+        drawer: Drawer(
+          backgroundColor: Colors.black,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: const [
+              UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                ),
+                accountEmail: Text(
+                  '@username12345',
+                  style: TextStyle(color: Colors.white),
+                ),
+                accountName: Text(
+                  'First Last',
+                  style: TextStyle(color: Colors.white),
+                ),
+                currentAccountPicture: Icon(
+                  Icons.person_2_outlined,
+                  color: Colors.amber,
+                ),
               ),
-              onPressed: () {},
-            ),
-            backgroundColor: Colors.black,
-            title: Container(
-                padding: const EdgeInsets.all(16),
-                alignment: const Alignment(-0.04, 1),
-                child: const Icon(
-                  FontAwesomeIcons.twitter,
-                  size: 30,
+              DrawerCards(
+                title: 'Profile',
+                icon: Icon(
+                  FontAwesomeIcons.user,
+                  color: Colors.white,
+                ),
+              ),
+              DrawerCards(
+                title: 'Twitter Blue',
+                icon: Icon(
+                  FontAwesomeIcons.squareTwitter,
                   color: Colors.blue,
-                )),
+                ),
+              ),
+              DrawerCards(
+                title: 'Topics',
+                icon: Icon(
+                  FontAwesomeIcons.message,
+                  color: Colors.white,
+                ),
+              ),
+              DrawerCards(
+                title: 'Bookmarks',
+                icon: Icon(
+                  FontAwesomeIcons.bookmark,
+                  color: Colors.white,
+                ),
+              ),
+              DrawerCards(
+                title: 'Lists',
+                icon: Icon(
+                  FontAwesomeIcons.book,
+                  color: Colors.white,
+                ),
+              ),
+              DrawerCards(
+                title: 'Twitter Circle',
+                icon: Icon(
+                  FontAwesomeIcons.userAstronaut,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
-          body: Container(
-            height: 35,
+        ),
+        body: const Center(
+          child: Text(
+            'Hello',
+            style: TextStyle(color: Colors.white),
           ),
-        ));
+        ),
+      ),
+    );
+  }
+}
+
+class DrawerCards extends StatelessWidget {
+  const DrawerCards({
+    super.key,
+    required this.title,
+    required this.icon,
+  });
+
+  final String title;
+  final Icon icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: icon,
+      title: Text(
+        title,
+        style: const TextStyle(color: Colors.white),
+      ),
+    );
   }
 }
