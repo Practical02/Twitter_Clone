@@ -16,24 +16,27 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
         primarySwatch: Colors.lightBlue,
       ),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
           shape:
               const Border(bottom: BorderSide(color: Colors.grey, width: 0.5)),
-          // leading: const Icon(
-          //   FontAwesomeIcons.circleUser,
-          //   color: Colors.blueAccent,
-          // ),
+          leading: Builder(builder: (context) {
+            return IconButton(
+              icon: const Icon(
+                FontAwesomeIcons.circleUser,
+                color: Colors.blueAccent,
+              ),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            );
+          }),
           backgroundColor: Colors.black,
-          title: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(border: Border.all(color: Colors.red)),
-              child: const Icon(
-                FontAwesomeIcons.twitter,
-                size: 30,
-                color: Colors.blue,
-              )),
+          title: const Icon(
+            FontAwesomeIcons.twitter,
+            size: 30,
+            color: Colors.blue,
+          ),
         ),
         drawer: Drawer(
           backgroundColor: Colors.black,
@@ -54,7 +57,7 @@ class MyApp extends StatelessWidget {
                 ),
                 currentAccountPicture: Icon(
                   Icons.person_2_outlined,
-                  color: Colors.amber,
+                  color: Colors.white,
                 ),
               ),
               DrawerCards(
