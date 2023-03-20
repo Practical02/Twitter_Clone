@@ -26,16 +26,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyAppState extends ChangeNotifier {}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class MyAppState extends ChangeNotifier {
   var index = 0;
   Widget page = const MyRealHomePage();
   void pageChange() {
@@ -53,8 +44,19 @@ class _MyHomePageState extends State<MyHomePage> {
         page = const TopicsPage();
         break;
     }
+    notifyListeners();
   }
+}
 
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  MyAppState state;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              UserAccountsDrawerHeader(
+              const UserAccountsDrawerHeader(
                 decoration: BoxDecoration(
                   color: Colors.black,
                 ),
@@ -102,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               DrawerCards(
                 title: 'Profile',
-                icon: Icon(
+                icon: const Icon(
                   FontAwesomeIcons.user,
                   color: Colors.white,
                 ),
@@ -110,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               DrawerCards(
                 title: 'Twitter Blue',
-                icon: Icon(
+                icon: const Icon(
                   FontAwesomeIcons.squareTwitter,
                   color: Colors.blue,
                 ),
@@ -118,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               DrawerCards(
                 title: 'Topics',
-                icon: Icon(
+                icon: const Icon(
                   FontAwesomeIcons.message,
                   color: Colors.white,
                 ),
@@ -126,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               DrawerCards(
                 title: 'Bookmarks',
-                icon: Icon(
+                icon: const Icon(
                   FontAwesomeIcons.bookmark,
                   color: Colors.white,
                 ),
@@ -134,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               DrawerCards(
                 title: 'Lists',
-                icon: Icon(
+                icon: const Icon(
                   FontAwesomeIcons.book,
                   color: Colors.white,
                 ),
@@ -142,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               DrawerCards(
                 title: 'Twitter Circle',
-                icon: Icon(
+                icon: const Icon(
                   FontAwesomeIcons.userAstronaut,
                   color: Colors.white,
                 ),
@@ -151,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-        body: page);
+        body: state.page);
   }
 }
 
@@ -169,7 +171,7 @@ class _MyRealHomePageState extends State<MyRealHomePage> {
       child: Center(
         child: Text(
           'Hello',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.blue),
         ),
       ),
     );
@@ -188,7 +190,7 @@ class DrawerCards extends StatelessWidget {
   final Icon icon;
   final int index;
 
-  _MyHomePageState? state;
+  MyAppState? st;
 
   @override
   Widget build(BuildContext context) {
@@ -200,7 +202,7 @@ class DrawerCards extends StatelessWidget {
       ),
       onTap: () {
         Navigator.pop(context);
-        state?.pageChange();
+        st?.pageChange();
       },
     );
   }
@@ -220,7 +222,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Center(
         child: Text(
           'Profile Page',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.blue),
         ),
       ),
     );
@@ -241,7 +243,7 @@ class _TwitterBluePageState extends State<TwitterBluePage> {
       child: Center(
         child: Text(
           'Twitter Blue Page',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.blue),
         ),
       ),
     );
@@ -262,7 +264,7 @@ class _TopicsPageState extends State<TopicsPage> {
       child: Center(
         child: Text(
           'Topics Page',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.blue),
         ),
       ),
     );
